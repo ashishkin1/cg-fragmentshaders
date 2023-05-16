@@ -143,7 +143,7 @@ export default {
         this.materials.custom = this.createShaderMaterial('custom', this.scene);
 
         // Create video textures
-        this.textures.video = new VideoTexture('video', BASE_URL + 'videos/dm_vector.mp4', this.scene, false,
+        this.textures.video = new VideoTexture('video', BASE_URL + 'videos/hazel.mp4', this.scene, false,
                                                false, VideoTexture.BILINEAR_SAMPLINGMODE, 
                                                {autoUpdateTexture: true, autoPlay: true, loop: true, muted: true});
 
@@ -188,6 +188,7 @@ export default {
             }
 
             if (this.textures[this.selected_texture] !== null) {
+                this.materials[this.filter].setFloat("timeName", "timeVariableName");
                 this.materials[this.filter].setTexture('image', this.textures[this.selected_texture]);
             }
         });

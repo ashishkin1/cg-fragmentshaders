@@ -3,6 +3,7 @@ precision mediump float;
 
 // Input
 in vec2 model_uv;   // Texture Coordinate
+uniform float time;
 
 // Uniforms
 uniform sampler2D image;
@@ -19,14 +20,15 @@ void main() {
     // calculate radius = magnitude of texture coordinate
     // calculate a texture coordinate offset = texture_coordinate * (sin(radius * 30.0 - time * 5.0) + 0.5) / 60.0
     // calculate final texture coordinate = original_texture_coordinate + texture_coordinate_offset
-    
-    vec2 texture_coordinate = (model_uv * 2.0) - 1.0;
+    FragColor = texture(image, model_uv);
 
-    float radius = length(texture_coordinate);
-    
-    vec2 texture_coordinate_offset = texture_coordinate * (sin(radius * 30.0 - time * 5.0) + 0.5) / 60.0;
-    
-    vec2 final_texture_coordinate = model_uv + texture_coordinate_offset;
+    vec2 scaled = (model_uv * 2.0) - 1.0;
 
-    FragColor = texture(image, final_texture_coordinate);
+    float radius = length(scaled);
+
+    vec2 offest = scaled * (sin(radius * 30.0 - time * 5.0) + 0.5) / 60.0;
+    vec2 final = model_uv + offest;
+
+    FragColor = texture(image, final);
+    
 }
