@@ -188,7 +188,7 @@ export default {
             }
 
             if (this.textures[this.selected_texture] !== null) {
-                this.materials[this.filter].setFloat("timeName", "timeVariableName");
+                this.materials[this.filter].setFloat('time', performance.now()/500);
                 this.materials[this.filter].setTexture('image', this.textures[this.selected_texture]);
             }
         });
